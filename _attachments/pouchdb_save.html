@@ -37,7 +37,7 @@
         <button id="stopper" class="btn btn-block btn-primary" onclick="stopWatch()" disabled>Stop Capture</button>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/pouchdb/6.0.4/pouchdb.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/pouchdb@7.1.1/dist/pouchdb.min.js"></script>
     <script>
         if (navigator.geolocation) {
             console.log("Geolocation is available");
@@ -50,7 +50,7 @@
         var last_lat = 0;
         var watchID = null;
         var db = new PouchDB('locationdb');
-        var remotedb = 'https://$APIKEY:$APIPASSWORD@$USERNAME.cloudant.com/locationtracker';
+        var remotedb = 'https://pearzaninglistanyuenerfa:9de4e7634a0fa603a40bcccd8ed926aaef61538b@c0f0593b-eecc-43f1-8678-a6f1de534015-bluemix.cloudantnosqldb.appdomain.cloud/locationtracker';
         PouchDB.sync(db, remotedb, {live:true,retry:true}, syncError);
 
         function startWatch() {
