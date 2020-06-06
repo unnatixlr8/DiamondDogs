@@ -9,6 +9,12 @@
     <title>Location Tracker Map</title>
     <link rel="stylesheet" href="style/leaflet.css" type="text/css">
     <link rel="stylesheet" href="style/main.css" type="text/css">
+     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+   integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+   crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+   integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+   crossorigin=""></script>
 
     <link rel="apple-touch-icon" href="images/location_tracker_appicon.png" />
 </head>
@@ -24,7 +30,6 @@
         <div id="map"></div>
     </div>
     <script src="//cdn.jsdelivr.net/npm/pouchdb@7.1.1/dist/pouchdb.min.js"></script>
-    <script src="script/leaflet.js" type="text/javascript"></script>
     <script>
     // var p = 'https://$USERNAME.cloudant.com/locationtracker';
     var p = 'https://' + window.location.host + '/' + window.location.pathname.split('/')[1];
@@ -36,15 +41,15 @@
 
     var map = L.map('map').setView([42.36, -71.1], 10);
 
-    var at = 'sk.eyJ1IjoidW5uYXRpeGxyOCIsImEiOiJjazV4MDEwdWEwNWh4M2ZuamF4eWRqejQwIn0.ammMynrKc1ivNTnz4u_--g';
-    L.tileLayer('https://{s}.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token='+at, {
-        maxZoom: 20,
-        attribution: 'Map data &copy; ' +
-            '<a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
-            '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>', 
-        detectRetina: true,
-        id: 'mapbox.streets-basic'
+    L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+        maxZoom: 18,
+        id: 'mapbox/streets-v11',
+        tileSize: 512,
+        zoomOffset: -1,
+        accessToken: 'sk.eyJ1IjoidW5uYXRpeGxyOCIsImEiOiJja2I0Nms2Z28wY25lMzVwYnQ1eWZ5ODM1In0.ahovDkJlDSMpfE9PxRXIYg'
     }).addTo(map);
+
 
     var movementLayer = L.geoJson(null, {
         pointToLayer: function(feature, latlng) {
